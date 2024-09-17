@@ -2,6 +2,30 @@ To create a Node.js project that uses Okta for authentication, you can use
 Okta's OpenID Connect (OIDC) along with the passport strategy for 
 integration. Here's a step-by-step guide to set up the project:
 
+```mermaid
+graph TD
+    A[User] -->|Requests Access| B[OAuth Provider]
+    B -->|Redirects to Authorization Server| C[Authorization Server]
+    C -->|Issues Authorization Code| A
+    A -->|Sends Authorization Code| D[Application Server]
+    D -->|Requests Token| B
+    B -->|Issues Access Token| D
+    D -->|Fetches Protected Resources| E[Protected Resource Server]
+
+    subgraph OAuth Flow
+        B
+        C
+    end
+
+    subgraph Application
+        D
+        E
+    end
+
+    style OAuth Flow fill:#f9f,stroke:#333,stroke-width:2px
+    style Application fill:#ccf,stroke:#333,stroke-width:2px
+```
+
 ## 1. Create an Okta Developer Account
 First, sign up for a free Okta developer account at 
 https://developer.okta.com. After signing up, create a new application in 
